@@ -58,7 +58,7 @@ call "http(s)://{server ip address}:{port}/{token}/download/{filename}"<br>
 1. you set client and server **AES encrypt key** when tool running.<br>
 note) *-auto* and *-autoDst* option.<br>
 
-2. server encrypt access details and send to **multicast udp(to 224.0.0.1)**.<br>
+2. server encrypt access details and send to **multicast udp(ex: 224.0.0.1)**.<br>
 3. client get this packet, decrypt data. If client decrypt success, get access url, port, token.<br>
 4. then, normal mode starting.<br>
 
@@ -95,14 +95,14 @@ This feature is not implemented.<br>
 If you want to put it under the path, you can use the following.
 
 ```
-go get github.com/yasutakatou/doukie
+go get github.com/yasutakatou/doukie2
 ```
 
 If you want to create a binary and copy it yourself, use the following.
 
 ```
-git clone https://github.com/yasutakatou/doukie
-cd doukie
+git clone https://github.com/yasutakatou/doukie2
+cd doukie2
 go build doukie.go
 ```
 
