@@ -223,6 +223,15 @@ this options enable on only PC. Android not useful.<br>
 
 ※1 If you set invalid value to this option, value set **"no"** force.
 
+# save options to file when exit. ".doukie" file.
+
+this tool can exit to **Escape key and save options to file**.
+note) file is save named **".doukie"** at current folder.
+If you run again this tool at no options, tool read that file, set options.
+
+If exists ".doukie" file and you set option, **override you seted options**.
+If you want to **reset all options, delete ".doukie" file**.
+
 # LICENSE
 
 BSD-3-Clause License
