@@ -169,7 +169,7 @@ doukie -dir=myDir -token=test -dst=192.168.0.1
 ```
 
  - by default if some file exists client, but not exists server, that file delete on client.<br>
-    when enable -noDelete option, not delete.<br>
+    when enable -notDelete option, not delete.<br>
 
 ```
 doukie -notDelete=yes-token=test -dst=192.168.0.1
