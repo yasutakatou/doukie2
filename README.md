@@ -46,8 +46,9 @@ and, I realize file transfer on multi platform **(include Smart phone!)**.
  - normal mode call following.<br>
 
 1.  client call server's api on static ip. 
-call "http(s)://{server ip address}:{port}/{token}/list"<br>
+call "http(s)://{server ip address}:{port}/{token}/list/{integer}"<br>
 note) static ip can be defined *-dst* option.<br>
+note) {integer} is number of in syncing files. this value used to syncing status at server.<br>
 
 2. If client can get lists, downloading files on static ip.<br>
 call "http(s)://{server ip address}:{port}/{token}/download/{filename}"<br>
@@ -156,7 +157,7 @@ doukie -autoDst=test
  - transfer by HTTPS.<br>
 
 ```
-doukie -https -cert=localhost.pem -key=localhost-key.pem -token=test
+doukie -https=yes -cert=localhost.pem -key=localhost-key.pem -token=test
 ```
 
 note) you have to prepare certs.<br>
@@ -171,7 +172,7 @@ doukie -dir=myDir -token=test -dst=192.168.0.1
     when enable -noDelete option, not delete.<br>
 
 ```
-doukie -noDelete -token=test -dst=192.168.0.1
+doukie -notDelete=yes-token=test -dst=192.168.0.1
 ```
 
 [See here for other options](https://github.com/yasutakatou/doukie2#options).
