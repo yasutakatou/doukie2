@@ -213,12 +213,14 @@ this options enable on only PC. Android not useful.<br>
 -wait|10|sync duration. (Second)|
 -dir|data|sync target directory|
 -debug|false|debug mode (true is enable)|
--https|no|https mode (yes is enable)|
+-https|no|https mode (yes is enable) ※1|
 -token||authentication token (if this value is null, is set random)|
 -port|8080|port number|
 -cert|localhost.pem|ssl_certificate file path (if you don't use https, haven't to use this option)|
 -key|localhost-key.pem|ssl_certificate_key file path (if you don't use https, haven't to use this option)|
--notDelete|no|not delete mode (yes is enable)|
+-notDelete|no|not delete mode (yes is enable) ※1|
+
+※1 If you set invalid value to this option, value set **"no"** force.
 
 # LICENSE
 
