@@ -1,12 +1,19 @@
 # doukie2
-multi platform, one binary, automated file transfer util by Golang. Version 2!
+multi platform, one binary, automated file transfer util by Golang. **Version 2!**
 
 doukie is meaned japanese word is "sync", and green day's album "dookie" anagramed.
 
 # attention!
 
-this repository is [not compatible previous version](https://github.com/yasutakatou/doukie).
-If you use to this repository feature, **you don't use previous version**.
+this repository is [not compatible previous version](https://github.com/yasutakatou/doukie).<br>
+If you use to this repository, **you can't use previous version**.<br>
+[Android client](https://github.com/yasutakatou/andoukie) **can't use previous, too**.<br>
+
+## this version support additional features following.
+
+- **recursive folder copy**.
+- **save options to file when exit**.
+- **sync progress is display**.
 
 # demo
 
@@ -25,11 +32,14 @@ and, I realize file transfer on multi platform **(include Smart phone!)**.
 
 # features
 
- - multi platform suppoted
- - run by one binary file
- - Android supported (it's not perfect)
- - automated file transfer.
- - file exists check (use md5 hash)
+- multi platform suppoted
+- run by one binary file
+- Android supported (it's not perfect)
+- automated file transfer.
+- file exists check (use md5 hash)
+- recursive folder copy.
+- save options to file when exit.
+- sync progress is display.
 
 # what auto sync mode?
 
