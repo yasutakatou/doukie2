@@ -17,7 +17,17 @@ If you use to this repository, **you can't use previous version**.<br>
 
 # demo
 
-(WIP)
+## auto sync.
+
+![autosync](https://github.com/yasutakatou/doukie2/blob/pic/autosync.gif)
+
+## sync deleted.
+
+![nodelete](https://github.com/yasutakatou/doukie2/blob/pic/nodelete.gif)
+
+## sync https
+
+![https](https://github.com/yasutakatou/doukie2/blob/pic/https.gif)
 
 # solution
 
@@ -106,7 +116,7 @@ cd doukie2
 go build doukie.go
 ```
 
-~~[or download binary from release page](https://github.com/yasutakatou/doukie2/releases).~~<br>
+[or download binary from release page](https://github.com/yasutakatou/doukie2/releases).<br>
 save binary file, copy to entryed execute path directory.
 
 # uninstall
@@ -188,16 +198,25 @@ doukie -notDelete=yes-token=test -dst=192.168.0.1
 ## doukie spray
 
 server can connected many client.<br>
+
+![party](https://github.com/yasutakatou/doukie/blob/pic/party.gif)
+
 If your team access one server, can transfer same file.
 
 ## doukie relay.
 
 doukie can running more than one on diffrent port number.<br>
+
+![relay](https://github.com/yasutakatou/doukie/blob/pic/relay.gif)
+
 Therefore, first process as a server, second process as a client, can file transfer relay.
 
 ## doukie over ssh.
 
 doukie use http transfer, so can over ssh forwarding.<br>
+
+![ssh](https://github.com/yasutakatou/doukie/blob/pic/ssh.gif)
+
 your remote server easy sync.
 
 # options
