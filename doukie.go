@@ -139,12 +139,12 @@ func main() {
 	config.dst = setConfigString(string(*_dst), config.dst)
 	config.wait = setConfigInt(int(*_wait), config.wait)
 	config.dir = setConfigString(string(*_dir), config.dir)
-	config.https = setConfigString(string(*_https), config.https)
+	config.https = setYesNoString(string(*_https), config.https)
 	config.token = setConfigString(string(*_token), config.token)
 	config.port = setConfigString(string(*_port), config.port)
 	config.cert = setConfigString(string(*_cert), config.cert)
 	config.key = setConfigString(string(*_key), config.key)
-	config.notDelete = setConfigString(string(*_notDelete), config.notDelete)
+	config.notDelete = setYesNoString(string(*_notDelete), config.notDelete)
 
 	config = setDefault(config)
 
@@ -298,6 +298,16 @@ func setConfigString(stra, strb string) string {
 		return stra
 	}
 	return strb
+}
+
+func setYesNoString(stra, strb string) string {
+	if stra == "yes" || stra == "no" {
+		return stra
+	}
+	if strb == "yes" || strb == "no" {
+		return strb
+	}
+	return ""
 }
 
 func setConfigInt(stra, strb int) int {
