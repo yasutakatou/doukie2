@@ -105,7 +105,7 @@ cd doukie
 go build doukie.go
 ```
 
-[or download binary from release page](https://github.com/yasutakatou/doukie/releases).<br>
+~~[or download binary from release page](https://github.com/yasutakatou/doukie2/releases).~~<br>
 save binary file, copy to entryed execute path directory.
 
 # uninstall
@@ -174,39 +174,29 @@ doukie -dir=myDir -token=test -dst=192.168.0.1
 doukie -noDelete -token=test -dst=192.168.0.1
 ```
 
-[See here for other options](https://github.com/yasutakatou/doukie#options).
+[See here for other options](https://github.com/yasutakatou/doukie2#options).
 
 ## case2: PC(server) to Android(client)
 
  - QR code scan and access to server<br>
 
-look at andoukie(doukie client for Android).<br>
-[what is andoukie? here.](https://github.com/yasutakatou/andoukie)<br>
+(WIP)
 
 # Interesting uses.
 
 ## doukie spray
 
 server can connected many client.<br>
-
-![party](https://github.com/yasutakatou/doukie/blob/pic/party.gif)
-
 If your team access one server, can transfer same file.
 
 ## doukie relay.
 
 doukie can running more than one on diffrent port number.<br>
-
-![relay](https://github.com/yasutakatou/doukie/blob/pic/relay.gif)
-
 Therefore, first process as a server, second process as a client, can file transfer relay.
 
 ## doukie over ssh.
 
 doukie use http transfer, so can over ssh forwarding.<br>
-
-![ssh](https://github.com/yasutakatou/doukie/blob/pic/ssh.gif)
-
 your remote server easy sync.
 
 # options
@@ -216,18 +206,19 @@ this options enable on only PC. Android not useful.<br>
 |option name|default value|detail|
 |:---|:---|:---|
 -auto||auto sync server mode enable and set encrypt token.|
--autoPort|9999|port number for auto sync mode.|
+-autoPort|9999|port number for ato sync mode.|
+-autoCast|224.0.0.1|multicast address define. If you want to use global scope, change this.|
 -autoDst||auto sync client mode enable and set decrypt token.|
 -dst||client mode enable and set access url.|
 -wait|10|sync duration. (Second)|
 -dir|data|sync target directory|
 -debug|false|debug mode (true is enable)|
--https|false|https mode (true is enable)|
+-https|no|https mode (yes is enable)|
 -token||authentication token (if this value is null, is set random)|
 -port|8080|port number|
 -cert|localhost.pem|ssl_certificate file path (if you don't use https, haven't to use this option)|
 -key|localhost-key.pem|ssl_certificate_key file path (if you don't use https, haven't to use this option)|
--notDelete|false|not delete mode (true is enable)|
+-notDelete|no|not delete mode (yes is enable)|
 
 # LICENSE
 
