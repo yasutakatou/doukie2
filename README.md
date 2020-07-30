@@ -251,6 +251,21 @@ If you run again this tool at no options, tool read that file, set options.<br>
 If exists ".doukie" file and you set option, **override you seted options**.<br>
 If you want to **reset all options, delete ".doukie" file**.<br>
 
+# TIPS
+
+## I want to use http(s) proxy to client.
+
+Here's some information.<br>
+FYI: [Setting up proxy for HTTP client](https://stackoverflow.com/questions/14661511/setting-up-proxy-for-http-client)<br>
+
+*windows's exsample)*<br>
+
+**set HTTP_PROXY=http://{Proxy address:{Proxy port}**<br>
+
+If you use to require basic authenticate.<br>
+
+**set HTTP_PROXY=http://{Auth User name}:{Auth User Password}@{Proxy address:{Proxy port}**
+
 # LICENSE
 
 BSD-3-Clause License
