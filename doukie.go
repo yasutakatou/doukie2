@@ -232,13 +232,13 @@ func clientsMonitor(wait int) {
 	for {
 		fmt.Println(" -- -- clients and status -- -- ")
 		for i := 0; i < len(clients); i++ {
-			if totalCounts == totalCounts {
+			if clients[i].Count == totalCounts {
 				if debug == true {
 					fmt.Printf(" >> %s Sync done! <<\n", clients[i].IP)
 				}
 			} else {
-				if clients[i].Count != 0 {
-					fmt.Printf(" << %s Syncing [%3d%%] (%d/%d)>>\n", clients[i].IP, int(percent.PercentOf(clients[i].Count, totalCounts)), clients[i].Count, totalCounts)
+				if clients[i].Count != 0 && (totalCounts-clients[i].Count) > 0 {
+					fmt.Printf(" << %s Syncing [%3d%%] (%d/%d)>>\n", clients[i].IP, int(percent.PercentOf((totalCounts-clients[i].Count), totalCounts)), (totalCounts - clients[i].Count), totalCounts)
 				}
 			}
 		}
@@ -834,17 +834,6 @@ func downloadHandler(w http.ResponseWriter, r *http.Request, filename string) {
 	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 	w.Header().Set("Content-Type", "application/json")
 
-	cFlag := -1
-	for i := 0; i < len(clients); i++ {
-		if clients[i].IP == strings.Split(r.RemoteAddr, ":")[0] {
-			cFlag = i
-		}
-	}
-
-	if cFlag > -1 {
-		clients[cFlag].Count = 3
-	}
-
 	// Open file on disk.
 	f, _ := os.Open(filename)
 
@@ -867,7 +856,7 @@ func listHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	if debug == true {
-		fmt.Println("list call: ", r.RemoteAddr)
+		fmt.Println("list call: ", r.RemoteAddr, r.URL.Path)
 	}
 
 	listUpFiles()
