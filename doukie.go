@@ -156,6 +156,9 @@ func main() {
 	}
 	prevDir, _ := filepath.Abs(".")
 	dataDir = prevDir + OSDIR + string(config.dir)
+	if runtime.GOOS == "windows" {
+		dataDir = strings.Replace(dataDir, "\\\\", "\\", -1)
+	}
 
 	if Exists(dataDir) == false {
 		fmt.Println("data folder is not found. and created.")
@@ -232,12 +235,12 @@ func clientsMonitor(wait int) {
 	for {
 		fmt.Println(" -- -- clients and status -- -- ")
 		for i := 0; i < len(clients); i++ {
-			if clients[i].Count == totalCounts {
+			if clients[i].Count == 0 {
 				if debug == true {
 					fmt.Printf(" >> %s Sync done! <<\n", clients[i].IP)
 				}
 			} else {
-				if clients[i].Count != 0 && (totalCounts-clients[i].Count) > 0 {
+				if (totalCounts - clients[i].Count) > 0 {
 					fmt.Printf(" << %s Syncing [%3d%%] (%d/%d)>>\n", clients[i].IP, int(percent.PercentOf((totalCounts-clients[i].Count), totalCounts)), (totalCounts - clients[i].Count), totalCounts)
 				}
 			}
@@ -399,14 +402,14 @@ func serverAutoSync(server, autoCast, autoport, port string, wait int) {
 			defer conn.Close()
 
 			for {
-				pingData, err := encrypt(ipadress+":"+port+":"+Token, []byte(addSpace(string(server))))
+				pingData, err := encrypt(ipadress+","+port+","+Token, []byte(addSpace(string(server))))
 				if err != nil {
 					fmt.Println("error: ", err)
 					os.Exit(1)
 				}
 				conn.Write([]byte(pingData))
 				if debug == true {
-					fmt.Println(" ping -> ", ipadress+":"+port+":"+Token)
+					fmt.Println(" ping -> ", ipadress+","+port+","+Token)
 				}
 				time.Sleep(time.Duration(wait) * time.Second)
 			}
@@ -464,7 +467,7 @@ func clientAutoSync(cast, dst, port string, wait int) {
 		}
 		decodes, err := decrypt(string(buffer[:length]), []byte(addSpace(dst)))
 		if err == nil {
-			params := strings.Split(decodes, ":")
+			params := strings.Split(decodes, ",")
 			if len(params) == 3 {
 				if debug == true {
 					fmt.Println(" pong <- ", decodes)
@@ -620,7 +623,7 @@ func doDownload(Message, dst string) bool {
 
 	for i := 0; i < len(stra); i++ {
 		if len(stra[i]) > 1 {
-			strb := strings.Split(stra[i], ":")
+			strb := strings.Split(stra[i], ";")
 			if []byte(strb[0])[0] == 32 {
 				strb[0] = strb[0][1:]
 			}
@@ -742,9 +745,13 @@ func listUpFiles() {
 		}
 	}
 
+	if totalCounts > 65535 {
+		totalCounts = 65535
+	}
+
 	if compareSlice() == false {
 		for i := 0; i < len(clients); i++ {
-			clients[i].Count = 0
+			clients[i].Count = totalCounts
 		}
 		bakHashs = Hashs
 	}
@@ -869,18 +876,22 @@ func listHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if cFlag == -1 {
-		clients = append(clients, syncLists{IP: strings.Split(r.RemoteAddr, ":")[0], Count: 0})
+		clients = append(clients, syncLists{IP: strings.Split(r.RemoteAddr, ":")[0], Count: 65535})
 	} else {
 		tmp, err := strconv.Atoi(r.URL.Path[strings.LastIndex(r.URL.Path, "/")+1:])
 		if err == nil {
-			clients[cFlag].Count = tmp
+			if tmp == 65535 {
+				clients[cFlag].Count = totalCounts
+			} else {
+				clients[cFlag].Count = tmp
+			}
 		}
 	}
 
 	lists := ""
 
 	for i := 0; i < len(Hashs); i++ {
-		lists = lists + Hashs[i].Filename + ":" + Hashs[i].Hash + ":" + Hashs[i].contentType + ", "
+		lists = lists + Hashs[i].Filename + ";" + Hashs[i].Hash + ";" + Hashs[i].contentType + ", "
 	}
 
 	data := &responseData{Status: "Success", Message: lists}
